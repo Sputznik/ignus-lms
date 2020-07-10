@@ -1,5 +1,5 @@
 <?php
-  define ( 'ignus-lms-version', '0.1.2' );
+  define ( 'ignus-lms-version', '0.2.0' );
 
   // Function to change email address
   function wpb_sender_email( $original_email_address ) {
@@ -28,5 +28,11 @@
   }
 
   add_action( 'wp_head', 'ign_google_analytics', 10 );
+
+  function ign_files() {
+    wp_enqueue_script('ign_theme_js', get_theme_file_uri('js/script.js'));
+  }
+
+  add_action('wp_print_footer_scripts', 'ign_files');
 
 ?>
