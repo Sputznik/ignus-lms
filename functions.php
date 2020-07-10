@@ -15,6 +15,7 @@
   add_filter( 'wp_mail_from', 'wpb_sender_email' );
   add_filter( 'wp_mail_from_name', 'wpb_sender_name' );
 
+  //GOOGLE ANALYTICS
   function ign_google_analytics() { ?>
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170499175-1"></script>
       <script>
@@ -28,8 +29,25 @@
 
   add_action( 'wp_head', 'ign_google_analytics', 10 );
 
+  //CUSTOM SCRIPTS
   function ign_files() {
-    wp_enqueue_script('ign_theme_js', get_theme_file_uri('js/script.js'));
+    //wp_enqueue_script('ign_theme_js', get_theme_file_uri('js/script.js'));
+    ?>
+    <script>
+    $(document).ready(function(){
+      $('form.sfwd-mark-complete').hide();
+      $('#yes-btn-instruction').hide();
+      $('#no-btn-instruction').hide();
+      $('#reveal-complete-btn').on('click', function(){
+        $('form.sfwd-mark-complete').show();
+        $('#yes-btn-instruction').show();
+      });
+      $('#incomplete-btn').on('click', function(){
+      	$('#no-btn-instruction').show();
+      });
+    });
+    </script>
+    <?php
   }
 
   add_action('wp_print_footer_scripts', 'ign_files');
